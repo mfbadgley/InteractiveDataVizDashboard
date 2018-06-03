@@ -58,7 +58,7 @@ function getData(dataset){
         
                 /* data route */
                 var url = `/samples/${x}`;//user input goes here
-
+                //pie chart
                 Plotly.d3.json(url, function (error, response) {//return the json
                     
                     console.log("response:", response);
@@ -81,8 +81,54 @@ function getData(dataset){
 
                      var chartData = [trace1];
                    
-        
+                //bubble chart
                 Plotly.newPlot("pie", chartData, layout);
+
+                var trace = {
+                    x: labels.slice(0,10),
+                    y: data.slice(0,10),
+                    type: "scatter",
+                    mode:'markers',
+                    marker: {
+                    size: data.slice(0,10),
+                    //selecting a sizeref of less than one increases the rendered marker size
+                    sizeref: .2,
+                    sizemode: 'area',
+                    color:  ['#add8e6','#b7dde5','#c0e1e5','#cae5e4','#d3e9e4',
+                    '#dceee3','#e4f2e2','#eef7e1','#5BD5D5','#8AD55B']
+                    }  
+                    
+                  };
+                  
+                  // The data array consists of both traces
+                  var data1 = [trace];
+                  
+                  var layout = {
+                    title: "Bubble",
+                    titlefont: {
+                        family:'Courier New, monospace',
+                        size: 24,
+                        color: '#00000'},
+                
+
+                    xaxis:{
+                        title: "OTU IDS",
+                        titlefont: {
+                            family:'Courier New, monospace',
+                            size: 18,
+                            color: '#7f7f7f'}
+                    },
+                    yaxis:{
+                        title:"SAMPLE VALUES",
+                        titlefont: {
+                            family:'Courier New, monospace',
+                            size: 18,
+                            color: '#7f7f7f'}
+                    }
+                
+                }
+
+                  Plotly.newPlot("scatter", data1, layout);
             });
         }
         
@@ -163,6 +209,9 @@ var layout = {
 Plotly.newPlot('gauge', data, layout);
               
           })
+
+         
+
         };
 
     }

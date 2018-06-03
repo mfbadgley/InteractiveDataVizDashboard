@@ -114,7 +114,7 @@ def samples(sample):
     if sample not in df.columns:
         return jsonify(f"Error! Sample: {sample} Not Found!"), 400
 
-    # Return any sample values greater than 1
+    # Return any sample values greater than 1..??
     df = df[df[sample] > 1]
 
     # Sort the results by sample in descending order
